@@ -6,10 +6,15 @@
 
 void prefix_out() {
 	std::cout
+		<< Color::FG_LIGHT_BLUE
+		<< "\u25b6 "
+		<< Color::FG_DEFAULT;
+}
+
+void prefix_in() {
+	std::cout
 		<< Color::FG_GREEN
-		<< Color::BOLD
-		<< "# "
-		<< Color::RESET
+		<< "\u25c0 "
 		<< Color::FG_DEFAULT;
 }
 
@@ -37,16 +42,13 @@ int main() {
 
 	prefix_out();
 	std::cout
-		<< Color::FG_BLUE
-		<< "🎉Welcome to RailShell!🎉"
+		<< Color::FG_YELLOW
+		<< "Welcome to RailShell!"
 		<< Color::FG_DEFAULT
 		<< std::endl;
 
 	while(1) {
-		std::cout
-			<< Color::FG_DARK_GRAY
-			<< "> "
-			<< Color::FG_DEFAULT;
+		prefix_in();
 
 		std::string line;
 		std::getline(std::cin, line);
