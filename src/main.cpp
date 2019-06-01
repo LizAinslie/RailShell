@@ -38,7 +38,7 @@ int main() {
 	prefix_out();
 	std::cout
 		<< Color::FG_BLUE
-		<< "Welcome to RailShell!"
+		<< "🎉Welcome to RailShell!🎉"
 		<< Color::FG_DEFAULT
 		<< std::endl;
 
