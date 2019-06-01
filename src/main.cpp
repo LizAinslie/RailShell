@@ -1,53 +1,52 @@
+#include <fcntl.h>
+#include <io.h>
 #include <iostream>
 #include <string>
+
+#ifdef _WIN32
+#define WIN true
+#else
+#define WIN false
+#endif
 
 #include "colors.h"
 
 void prefix_out() {
-	std::cout
-		<< Color::FG_LIGHT_BLUE
-		<< "\u25b6 "
-		<< Color::FG_DEFAULT;
+  std::wcout << Color::FG_LIGHT_BLUE << L"\u25b6 " << Color::FG_DEFAULT;
 }
 
 void prefix_in() {
-	std::cout
-		<< Color::FG_GREEN
-		<< "\u25c0 "
-		<< Color::FG_DEFAULT;
+  std::wcout << Color::FG_GREEN << L"\u25c0 " << Color::FG_DEFAULT;
 }
 
 void shutdown() {
-	prefix_out();
+  prefix_out();
 
-	std::cout
-		<< Color::FG_LIGHT_RED
-		<< "Quitting..."
-		<< Color::FG_DEFAULT
-		<< std::endl;
+  std::wcout << Color::FG_LIGHT_RED << "Quitting..." << Color::FG_DEFAULT
+             << std::endl;
 
-	exit(0);
+  exit(0);
 }
 
 int main() {
-	prefix_out();
-	std::cout
-		<< Color::FG_YELLOW
-		<< "Welcome to RailShell!"
-		<< Color::FG_DEFAULT
-		<< std::endl;
+  _setmode(_fileno(stdout), _O_U8TEXT);
 
-	while(1) {
-		prefix_in();
+  prefix_out();
+  std::wcout << Color::FG_YELLOW << "Welcome to RailShell!" << Color::FG_DEFAULT
+             << std::endl;
 
-		std::string line;
-		std::getline(std::cin, line);
+  while (1) {
+    prefix_in();
 
-		if (line == "q") shutdown();
+    std::string line;
+    std::getline(std::cin, line);
 
-		prefix_out();
-		std::cout << line << std::endl;
-	}
+    if (line == "q")
+      shutdown();
 
-	return 0;
+    prefix_out();
+    std::cout << line << std::endl;
+  }
+
+  return 0;
 }
