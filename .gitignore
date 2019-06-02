@@ -1,7 +1,9 @@
 #####
 # Binaries
 #####
-bin/
+rsh
+*.deb
+*.rpm
 
 #####
 # Project Files
@@ -12,4 +14,11 @@ bin/
 #####
 # CMake
 #####
-build/
+cmake_install.cmake
+CMakeCache.txt
+Makefile
+CMakeFiles/
+_CPack_Packages/
+install_manifest.txt
+CPackConfig.cmake
+CPackSourceConfig.cmake
