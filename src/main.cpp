@@ -15,8 +15,6 @@ void shutdown() {
 	prefix_out();
 
 	std::cout << Color::FG_LIGHT_RED << "Quitting..." << Color::FG_DEFAULT << std::endl;
-
-	exit(0);
 }
 
 int main() {
@@ -29,8 +27,10 @@ int main() {
 		std::string line;
 		std::getline(std::cin, line);
 
-		if (line == "q")
+		if (line == "q") {
 			shutdown();
+			break;
+		}
 
 		prefix_out();
 		std::cout << line << std::endl;
