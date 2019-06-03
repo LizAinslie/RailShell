@@ -18,9 +18,9 @@ deploy:
   api_key:
     secure: v/HQtgN44XNv1sAD5cnsM8bOv8k5TRn5yhl1PddpQu0MYkNWgjmmQYw4f8xzcpNbSFgHkewbC1ZZIyNUYtItm9OX0JukUW+G2kJzfu2MdwWWx9ICMCMpPX0UZD4Vtdjvge88lbF9XuGb1Q+jwt9KQZnF/GWbQBxqRqni5M2VArYhfE0PELFpTYk3F5dEY4cfW8y9oBHnKvm7IvSBzcSz0JZSh5Cr6Hgo5O9LOXE0T4scoF5bmK2jXSfrgG+ddXoODEo6e6xaXHn9umu32Qdtd9ibxD+vYldx+eYEJLUEy61QiHIUS/0i0p9J2KcR2/8rCHeoRnI2I5SR2YIOWHsVTc7QWWRDyyHEBl/MTQuVc7KSCW9wO82uGOQyUosOLpRpXcXRVU+akgEnek+HJhcIPYWrB8gL5trapJBjIYVN+iTU30QDch747sVid8lMHE0iFYzTy9sJB/pZ77RFxhgWjZzQr/RXbDzCew4OziRGfj556UWK6T9V7xZ2RID7OuSK5ajwLYLTIeXR8+o8wXA9ml4eNVdQiZLKxm9xxr76BRRgeByhb4ZwSAM2r/bhmvHHHKJvrOHkwFpjVqu3N7KlsXDBsYQ/Uy6mZxmjPg0oOxim8z83so4tYB/A821lMr+gE/0YOMkbgft8DtWDsVC+5wmrOipquI/iJpB9D4hWqmM=
   file: 
-    - *.deb
-    - *.rpm
-    - *.dmg
+    - ./*.deb
+    - ./*.rpm
+    - ./*.dmg
   skip_cleanup: true
   on:
     repo: RailRunner166/RailShell
