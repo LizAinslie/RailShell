@@ -46,6 +46,14 @@ int main() {
   std::cout << Color::FG_YELLOW << "Welcome to RailShell!" << Color::FG_DEFAULT
             << std::endl;
 
+  prefix_out();
+  std::cout << Color::FG_YELLOW << "RailShell is a colorful shell made by RailRunner16." << Color::FG_DEFAULT
+            << std::endl;
+
+  prefix_out();
+  std::cout << Color::FG_YELLOW << "Email: railinator4903@gmail.com" << Color::FG_DEFAULT
+            << std::endl;
+
   while (1) {
     prefix_in();
 
