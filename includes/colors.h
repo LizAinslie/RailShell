@@ -1,3 +1,7 @@
+//
+// Created by Landon Gravat
+//
+
 #include <ostream>
 
 namespace Color {
