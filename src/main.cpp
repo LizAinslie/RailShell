@@ -14,7 +14,7 @@ void prefix_in() {
   std::cout << Color::FG_GREEN << "\u25c0 " << Color::FG_DEFAULT;
 }
 
-void exec(std::string cmd) {
+void exec(const char *cmd) {
   std::array<char, 128> buffer;
   std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd, "r"), pclose);
 
@@ -56,7 +56,7 @@ int main() {
     // prefix_out();
     // std::cout << line << std::endl;
 
-    exec(line);
+    exec(line.c_str());
   }
 
   return 0;
