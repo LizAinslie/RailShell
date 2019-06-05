@@ -10,12 +10,25 @@
 
 #include "colors.h"
 
+#ifdef _WIN32
+
+#include <io.h>
+#include <fcntl.h>
+
+#define WIN true
+
+#else
+
+#define WIN false
+
+#endif
+
 void prefix_out() {
-  std::cout << Color::FG_LIGHT_BLUE << "\u25b6 " << Color::FG_DEFAULT;
+  std::wcout << Color::FG_LIGHT_BLUE << "\u25b6 " << Color::FG_DEFAULT;
 }
 
 void prefix_in() {
-  std::cout << Color::FG_GREEN << "\u25c0 " << Color::FG_DEFAULT;
+  std::wcout << Color::FG_GREEN << "\u25c0 " << Color::FG_DEFAULT;
 }
 
 void exec(const char *cmd) {
@@ -24,35 +37,40 @@ void exec(const char *cmd) {
 
   if (!pipe) {
     prefix_out();
-    std::cout << Color::FG_RED << "popen() failed!" << Color::FG_DEFAULT
+    std::wcout << Color::FG_RED << "popen() failed!" << Color::FG_DEFAULT
               << std::endl;
   }
 
   while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) {
     prefix_out();
-    std::cout << buffer.data();
+    std::wcout << buffer.data();
   }
 }
 
 void shutdown() {
   prefix_out();
 
-  std::cout << Color::FG_LIGHT_RED << "Quitting..." << Color::FG_DEFAULT
+  std::wcout << Color::FG_LIGHT_RED << "Quitting..." << Color::FG_DEFAULT
             << std::endl;
 }
 
 int main() {
+  #ifdef _WIN32
+  _setmode(_fileno(stdout), _O_U8TEXT);
+  #endif
+
   prefix_out();
-  std::cout << Color::FG_YELLOW << "Welcome to RailShell!" << Color::FG_DEFAULT
+  std::wcout << Color::FG_YELLOW << "Welcome to RailShell!" << Color::FG_DEFAULT
             << std::endl;
 
   prefix_out();
-  std::cout << Color::FG_YELLOW << "RailShell is a colorful shell made by RailRunner16." << Color::FG_DEFAULT
-            << std::endl;
+  std::wcout << Color::FG_YELLOW
+            << "RailShell is a colorful shell made by RailRunner16."
+            << Color::FG_DEFAULT << std::endl;
 
   prefix_out();
-  std::cout << Color::FG_YELLOW << "Email: railinator4903@gmail.com" << Color::FG_DEFAULT
-            << std::endl;
+  std::cout << Color::FG_YELLOW << "Email: railinator4903@gmail.com"
+            << Color::FG_DEFAULT << std::endl;
 
   while (1) {
     prefix_in();
