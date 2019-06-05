@@ -22,3 +22,13 @@ _CPack_Packages/
 install_manifest.txt
 CPackConfig.cmake
 CPackSourceConfig.cmake
+Debug
+rsh.dir
+
+#####
+# Visual Studio
+#####
+*.vcxproj.filters
+*.vcxproj
+*.sln
+Win32/

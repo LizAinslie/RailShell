@@ -12,8 +12,9 @@
 
 #ifdef _WIN32
 
-#include <io.h>
+#include <windows.h>
 #include <fcntl.h>
+#include <io.h>
 
 #define WIN true
 
@@ -31,6 +32,7 @@ void prefix_in() {
   std::wcout << Color::FG_GREEN << "\u25c0 " << Color::FG_DEFAULT;
 }
 
+#ifndef _WIN32
 void exec(const char *cmd) {
   std::array<char, 128> buffer;
   std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd, "r"), pclose);
@@ -38,7 +40,7 @@ void exec(const char *cmd) {
   if (!pipe) {
     prefix_out();
     std::wcout << Color::FG_RED << "popen() failed!" << Color::FG_DEFAULT
-              << std::endl;
+               << std::endl;
   }
 
   while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) {
@@ -46,27 +48,36 @@ void exec(const char *cmd) {
     std::wcout << buffer.data();
   }
 }
+#endif
 
 void shutdown() {
   prefix_out();
 
   std::wcout << Color::FG_LIGHT_RED << "Quitting..." << Color::FG_DEFAULT
-            << std::endl;
+             << std::endl;
 }
 
 int main() {
-  #ifdef _WIN32
+#ifdef _WIN32
   _setmode(_fileno(stdout), _O_U8TEXT);
-  #endif
+  HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+  SetConsoleTextAttribute(hConsole, 33);
+
+  std::wcout << "Welcome to RailShell!" << std::endl;
+  std::wcout << "Windows support is currently in progress, check back later!"
+             << std::endl;
+  return 0;
+#else
 
   prefix_out();
   std::wcout << Color::FG_YELLOW << "Welcome to RailShell!" << Color::FG_DEFAULT
-            << std::endl;
+             << std::endl;
 
   prefix_out();
   std::wcout << Color::FG_YELLOW
-            << "RailShell is a colorful shell made by RailRunner16."
-            << Color::FG_DEFAULT << std::endl;
+             << "RailShell is a colorful shell made by RailRunner16."
+             << Color::FG_DEFAULT << std::endl;
 
   prefix_out();
   std::cout << Color::FG_YELLOW << "Email: railinator4903@gmail.com"
@@ -90,4 +101,5 @@ int main() {
   }
 
   return 0;
+#endif
 }
