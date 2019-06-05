@@ -12,9 +12,10 @@
 
 #ifdef _WIN32
 
-#include <windows.h>
+#include <Wincon.h>
 #include <fcntl.h>
 #include <io.h>
+#include <windows.h>
 
 #define WIN true
 
@@ -62,10 +63,11 @@ int main() {
   _setmode(_fileno(stdout), _O_U8TEXT);
   HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
-  SetConsoleTextAttribute(hConsole, 33);
+  SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
 
-  std::wcout << "Welcome to RailShell!" << std::endl;
-  std::wcout << "Windows support is currently in progress, check back later!"
+  std::wcout << FOREGROUND_RED << "Welcome to RailShell!" << std::endl;
+  std::wcout << FOREGROUND_RED
+             << "Windows support is currently in progress, check back later!"
              << std::endl;
   return 0;
 #else
