@@ -44,6 +44,6 @@ enum Code {
 };
 
 std::ostream &operator<<(std::ostream &os, Code code) {
-  return os << L"\033[" << static_cast<int>(code) << L"m";
+  return os << "\033[" << static_cast<int>(code) << "m";
 }
 } // namespace Color

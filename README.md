@@ -11,11 +11,12 @@ Developing the app isnt easy, here is some stuff you should read first.
 Building the application is as simple as running:
 ```sh
 $ chmod +x scripts/build.sh
-$ ./scripts/build.sh
+$ ./scripts/build.sh platform
 ```
+Where platform is one of `windows` or `linux`, based on your os.
 
 ### Code Style
-It is important that you adhere to our code style.
+It is important that you adhere to our code style. This makes it easier for us to debug, code, and solve problems.
 
 #### Clang Format
 Only format the items in the `includes` and `src` directories. We use two-space tabs, so set your editor accordingly.

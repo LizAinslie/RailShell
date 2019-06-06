@@ -26,11 +26,11 @@
 #endif
 
 void prefix_out() {
-  std::wcout << Color::FG_LIGHT_BLUE << "\u25b6 " << Color::FG_DEFAULT;
+  std::cout << Color::FG_LIGHT_BLUE << "\u25b6 " << Color::FG_DEFAULT;
 }
 
 void prefix_in() {
-  std::wcout << Color::FG_GREEN << "\u25c0 " << Color::FG_DEFAULT;
+  std::cout << Color::FG_GREEN << "\u25c0 " << Color::FG_DEFAULT;
 }
 
 #ifndef _WIN32
@@ -40,13 +40,13 @@ void exec(const char *cmd) {
 
   if (!pipe) {
     prefix_out();
-    std::wcout << Color::FG_RED << "popen() failed!" << Color::FG_DEFAULT
+    std::cout << Color::FG_RED << "popen() failed!" << Color::FG_DEFAULT
                << std::endl;
   }
 
   while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) {
     prefix_out();
-    std::wcout << buffer.data();
+    std::cout << buffer.data();
   }
 }
 #endif
@@ -54,30 +54,30 @@ void exec(const char *cmd) {
 void shutdown() {
   prefix_out();
 
-  std::wcout << Color::FG_LIGHT_RED << "Quitting..." << Color::FG_DEFAULT
+  std::cout << Color::FG_LIGHT_RED << "Quitting..." << Color::FG_DEFAULT
              << std::endl;
 }
 
 int main() {
 #ifdef _WIN32
   _setmode(_fileno(stdout), _O_U8TEXT);
-  HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+  // HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
-  SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+  // SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
 
-  std::wcout << FOREGROUND_RED << "Welcome to RailShell!" << std::endl;
-  std::wcout << FOREGROUND_RED
+  std::wcout << Color::FG_RED << "Welcome to RailShell!" << Color::FG_DEFAULT << std::endl;
+  std::wcout << Color::FG_RED
              << "Windows support is currently in progress, check back later!"
-             << std::endl;
+             << Color::FG_DEFAULT << std::endl;
   return 0;
 #else
 
   prefix_out();
-  std::wcout << Color::FG_YELLOW << "Welcome to RailShell!" << Color::FG_DEFAULT
+  std::cout << Color::FG_YELLOW << "Welcome to RailShell!" << Color::FG_DEFAULT
              << std::endl;
 
   prefix_out();
-  std::wcout << Color::FG_YELLOW
+  std::cout << Color::FG_YELLOW
              << "RailShell is a colorful shell made by RailRunner16."
              << Color::FG_DEFAULT << std::endl;
 
