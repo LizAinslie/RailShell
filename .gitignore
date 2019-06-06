@@ -4,6 +4,8 @@
 rsh
 *.deb
 *.rpm
+*.dmg
+*.exe
 
 #####
 # Project Files
