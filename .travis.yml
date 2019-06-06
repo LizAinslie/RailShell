@@ -5,10 +5,9 @@ compiler:
 os:
 - linux
 - osx
-- windows
 before_install:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -qq; sudo apt-get
-  install -qq rpm; fi
+  install -qq rpm nsis; fi
 script:
 - cmake .
 - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
@@ -16,9 +15,8 @@ script:
   else
     cmake --build . -- -j3;
   fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then cpack -G DEB .; cpack -G RPM .; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then cpack -G DEB .; cpack -G RPM .; cpack -G NSIS .; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cpack -G DragNDrop .; cpack -G NSIS .; fi
-# - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then cpack -G NSIS .; fi
 deploy:
   provider: releases
   api_key:
@@ -28,6 +26,7 @@ deploy:
     - ./*.deb
     - ./*.rpm
     - ./*.dmg
+    - ./*.exe
   skip_cleanup: true
   on:
     repo: RailRunner166/RailShell
