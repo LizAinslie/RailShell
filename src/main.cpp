@@ -12,10 +12,9 @@
 
 #ifdef _WIN32
 
-#include <Wincon.h>
+#include <windows.h>
 #include <fcntl.h>
 #include <io.h>
-#include <windows.h>
 
 #define WIN true
 
