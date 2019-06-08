@@ -6,7 +6,6 @@ project(RailShell)
 set(CMAKE_PROJECT_NAME "railshell")
 
 # Set the output folder where your program will be created
-# set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/bin)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR})
 set(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR})
 set(PROJECT_SRC ${PROJECT_SOURCE_DIR}/src)
@@ -22,7 +21,6 @@ add_executable(rsh ${PROJECT_SRC}/main.cpp)
 install(TARGETS rsh DESTINATION bin)
 
 # CPack
-set(CPACK_GENERATOR "DEB;RPM")
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Landon Gravat") #required
 set(CPACK_PACKAGE_VERSION ${VERSION})
 set(CPACK_PACKAGE_NAME "railshell")
