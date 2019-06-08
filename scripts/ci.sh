@@ -1,4 +1,4 @@
-if [[ -z "$TRAVIS_TAG" ]]; then
+if [[ ! -z "$TRAVIS_TAG" ]]; then
   cmake . -DVERSION=$TRAVIS_TAG;
 else
   cmake .;
