@@ -5,10 +5,21 @@ pull_requests:
 
 skip_non_tags: true
 
-image: Visual Studio 2019
+image:
+  - Visual Studio 2019
+  - Visual Studio 2017
+
+clone_folder: c:\projects\railshell
 
 init:
-  # Set "build version number" to "short-commit-hash" or when tagged to "tag name" (Travis style)
+  - cmd: >-
+      set arch=
+      if "%arch%"=="Win64" ( set arch= Win64)
+      echo %arch%
+      echo %APPVEYOR_BUILD_WORKER_IMAGE%
+      if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2019" ( set generator="Visual Studio 15 2019%arch%" )
+      if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2017" ( set generator="Visual Studio 15 2017%arch%" )
+      echo %generator%
   - ps: >-
       if ($env:APPVEYOR_REPO_TAG -eq "true") {
         Update-AppveyorBuild -Version "$env:APPVEYOR_REPO_TAG_NAME"
@@ -16,9 +27,21 @@ init:
         Update-AppveyorBuild -Version "$($env:APPVEYOR_REPO_COMMIT.substring(0,7))"
       }
 
-build_script:
-- ps: >-
-    Invoke-Expression ".\scripts\appveyor.ps1"
+before_build:
+- cmd: >-
+    mkdir build
+    cd build
+    cmake --version
+    cmake .. -G %generator%
+
+build:
+  project: c:\projects\railshell\build\template.sln
+  verbosity: minimal
+  parallel: true
+
+after_build:
+  - ps: >-
+      cpack -G NSIS .
 
 test_script:
 - sh: >-
