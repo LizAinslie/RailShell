@@ -17,7 +17,8 @@ init:
       }
 
 build_script:
-- sh: bash -xe ./scripts/ci.sh
+- ps: >-
+    Invoke-Expression ".\scripts\appveyor.ps1"
 
 test_script:
 - sh: >-
