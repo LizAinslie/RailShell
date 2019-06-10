@@ -1,0 +1,27 @@
+version: 1.0.{build}
+
+pull_requests:
+  do_not_increment_build_number: true
+
+skip_non_tags: true
+
+image: Visual Studio 2019
+
+build_script:
+- sh: bash -xe ./scripts/ci.sh
+
+test_script:
+- sh: >-
+    chmod +x scripts/build.sh
+    ./scripts/build.sh windows
+
+artifacts:
+- path: "*.exe"
+  name: Installer
+
+deploy:
+- provider: GitHub
+  auth_token:
+    secure: JYqExHLUme29xJ0gLyh3sg42sV5kXQDL0JushVcUywQxDN1HsNdMUO73o2HHn56+
+  artifact: Installer
+  force_update: true
