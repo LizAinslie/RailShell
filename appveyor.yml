@@ -1,4 +1,4 @@
-version: 1.0.{build}
+version: $(APPVEYOR_REPO_TAG_NAME)
 
 pull_requests:
   do_not_increment_build_number: true
@@ -16,7 +16,7 @@ test_script:
     ./scripts/build.sh windows
 
 artifacts:
-- path: "*.exe"
+- path: '*.exe'
   name: Installer
 
 deploy:
