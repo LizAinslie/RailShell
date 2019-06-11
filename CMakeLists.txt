@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.10)
 set(CMAKE_CXX_STANDARD 17)
 
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+set(IDE_FOLDER "")
+
 # Project's name
 project(RailShell)
 set(CMAKE_PROJECT_NAME "railshell")

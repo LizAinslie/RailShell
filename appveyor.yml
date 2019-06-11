@@ -36,7 +36,7 @@ before_build:
     cmake .. -G %generator%
 
 build:
-  project: c:\projects\railshell\build\template.sln
+  project: c:\projects\railshell\build\RailShell.sln
   verbosity: minimal
   parallel: true
 
