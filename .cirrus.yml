@@ -1,0 +1,23 @@
+windows_install_task:
+  install_script: |-
+    choco install nsis
+
+test_task_template: &TEST_TASK_TEMPLATE
+  only_if: $CIRRUS_TAG == ''
+  test_script: |-
+    cmake .
+    cmake --build .
+
+windows_test_task:
+  <<: *TEST_TASK_TEMPLATE
+  windows_container:
+    image: cirrusci/windowsservercore:2019
+    os_version: 2019
+  depends_on:
+    - windows_install
+
+mac_test_task:
+  <<: *TEST_TASK_TEMPLATE
+  osx_instance:
+    image: mojave-xcode-10.2
+    
