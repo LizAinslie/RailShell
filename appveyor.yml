@@ -13,16 +13,13 @@ clone_folder: c:\projects\railshell
 
 init:
   - cmd: |-
-      # Build Generator
       set arch=
       if "%arch%"=="Win64" ( set arch= Win64)
       if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2019" ( set generator="Visual Studio 16 2019" )
       if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2017" ( set generator="Visual Studio 15 2017%arch%" )
       
-      # Dependencies
       choco install nsis -pre
   - ps: |-
-      # Version
       if ($env:APPVEYOR_REPO_TAG -eq "true") {
         Update-AppveyorBuild -Version "$env:APPVEYOR_REPO_TAG_NAME"
       } else {
@@ -30,18 +27,18 @@ init:
       }
 
 before_build:
+  # Generate Build Files
   - cmd: |-
-      # Generate Build Files
       cmake . -G %generator%
 
 build_script:
+  # Build and Package the App
   - ps: |-
-      # Build and Package the App
       cpack -G NSIS .
 
 test_script:
+  # Test if it builds
   - cmd: |-
-      # Test if it builds
       cmake .
       cmake --build .
 
