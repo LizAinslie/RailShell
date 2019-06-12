@@ -3,7 +3,7 @@ windows_install_task:
     image: cirrusci/windowsservercore:2019
     os_version: 2019
   install_script: |-
-    choco install -y nsis
+    choco install -y nsis cmake
 
 test_task_template: &TEST_TASK_TEMPLATE
   only_if: $CIRRUS_TAG == ''
