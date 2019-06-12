@@ -1,4 +1,7 @@
 windows_install_task:
+  windows_container:
+    image: cirrusci/windowsservercore:2019
+    os_version: 2019
   install_script: |-
     choco install nsis
 
@@ -20,4 +23,3 @@ mac_test_task:
   <<: *TEST_TASK_TEMPLATE
   osx_instance:
     image: mojave-xcode-10.2
-    
