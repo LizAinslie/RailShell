@@ -3,7 +3,9 @@ windows_install_task:
     image: cirrusci/windowsservercore:2019
     os_version: 2019
   install_script: |-
-    choco install -y nsis cmake
+    choco install -y nsis
+    choco install -y cmake --version 3.14
+    set PATH="C:\Program Files (x86)\CMake 3.14\bin\";%PATH%
 
 test_task_template: &TEST_TASK_TEMPLATE
   only_if: $CIRRUS_TAG == ''
